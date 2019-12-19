@@ -16,7 +16,7 @@ public class Die {
     }
 
     public void roll() {
-        this.currentFaceValue = (int)Math.random()*numberOfFaces +1;
+        this.currentFaceValue = (int)(Math.random()*numberOfFaces) +1;
     }
 
     public Integer getCurrentFaceValue() {

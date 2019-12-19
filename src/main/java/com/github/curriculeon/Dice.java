@@ -1,6 +1,9 @@
 package com.github.curriculeon;
 
 public class Dice {
+    Die[] dice;
+    Integer numberOfDie;
+    Integer numberOfFaces;
 
     /**
      * @param numberOfDie - number of die-objects to be contained
@@ -10,10 +13,21 @@ public class Dice {
     }
 
     /**
-     * @param numberOfDie - number of die-objects to be contained
+     * @param numberOfDie   - number of die-objects to be contained
      * @param numberOfFaces - number of faces on a single die-object
      */
     public Dice(Integer numberOfDie, Integer numberOfFaces) {
+        if(numberOfDie <1 || numberOfFaces <=1){
+            throw new IllegalArgumentException();
+        }
+
+        Die[] temp = new Die[numberOfDie];
+        for(int i=0; i<numberOfDie; i++){
+            temp[i] = new Die(numberOfFaces);
+        }
+        this.dice = temp;
+        this.numberOfDie = numberOfDie;
+        this.numberOfFaces = numberOfFaces;
     }
 
     /**
@@ -21,20 +35,25 @@ public class Dice {
      * sum all of the random numbers up and that equals total for that roll
      */
     public Integer rollAndSum() {
-        return null;
+        int sum =0;
+        for(Die d : dice){
+            d.roll();
+            sum += d.getCurrentFaceValue();
+        }
+        return sum;
     }
 
     /**
      * @return the absolute minimum value that can be rolled by this set of die
      */
     public Integer getRollMin() {
-        return null;
+        return numberOfDie;
     }
 
     /**
      * @return the absolute maximum value that can be rolled by this set of die
      */
     public Integer getRollMax() {
-        return null;
+        return numberOfDie * numberOfFaces;
     }
 }
